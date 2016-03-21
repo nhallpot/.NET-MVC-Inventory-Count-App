@@ -1,0 +1,31 @@
+﻿@model InventoryCountWebApp.Models.Item
+
+<tr id="@Model.ID" data-counted="@(Model.OnHand != Model.NewOnHand || Model.Confirmed ? "true":"false")" data-zero-on-hand="@(Model.OnHand==0 ? "true":"false")" data-bin-location="@Model.BinLocation" data-quantity-changed="@(Model.NewOnHand!= Model.OnHand ? "true" : "false")" data-confirm-checked="@(Model.Confirmed ? "true" : "false")" data-id="@(Model.ID)">
+    <td class="no-wrap column-with-border">
+        <div id="bin-location-for-item-id-@(Model.ID)">@(Model.BinLocation)</div>
+    </td>
+    <td title="Go to NetSuite">
+        <a class="regular-text" href="https://system.netsuite.com/app/common/item/item.nl?id=@(Model.ID)" target="_blank">@(Model.Name) </a>
+    </td>
+    <td id="initial-on-hand-for-item-id-@(Model.ID)" class="column-with-border initial-on-hand" data-initial-on-hand="@(Model.OnHand)" data-new-on-hand="@(Model.NewOnHand)">
+        @(Model.OnHand)
+    </td>
+    <td class="column-with-border">
+        <label class="btn btn-primary font-size ajax-input">
+            <input id="confirm-check-for-item-id-@(Model.ID)" name="ConfirmCheckForItemId@(Model.ID)" type="checkbox" autocomplete="off" checked="@(Model.Confirmed ? "checked" : null)" value="ConfirmedCorrect" />Correct
+        </label>
+    </td>
+    <td class=" column-with-border">
+        <div class="input-checker input-group" style="@(Model.Confirmed ? "display:none":null)"><input class="max-width-quantity ajax-input" id="new-quantity-for-item-id-@(Model.ID)" type="number" step="1" value="@(Model.NewOnHand!=Model.OnHand ? Model.NewOnHand.ToString() : null )" name="NewQuantityForItemId@(Model.ID)" placeholder="New Qty" /></div>
+    </td>
+    <td class="column-with-border">
+        <a id="description-for-item-id-@(Model.ID)" href="@(Url.Action("Description", new { id = Model.ID }))" data-empty="@(Model.Notes==null && Model.NewBinLocation == Model.BinLocation ? "true":"false")" class="btn btn-primary btnl-lg active font-size fancybox description-link" role="button">...</a>
+    </td>
+    <!-- The two table columns below are edited using an ajax-input window. This saves space on our table.-->
+    <td>
+        <input id="notes-for-item-id-@(Model.ID)" class="changed-from-fancybox" name="NotesForItemId@(Model.ID)" type="hidden" value="@Model.Notes" />
+    </td>
+    <td>
+        <input id="new-bin-location-for-item-id-@(Model.ID)" class="changed-from-fancybox" name="NewBinLocationForItem@(Model.ID)" type="hidden" value="@Model.NewBinLocation" />
+    </td>
+</tr>

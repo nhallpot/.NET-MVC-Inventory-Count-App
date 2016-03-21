@@ -1,0 +1,36 @@
+﻿@model InventoryCountWebApp.Models.LogInModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Log In</title>
+        <meta name="viewport" content="width=device-width" />
+        <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/Content/login.css" />
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+    </head>
+
+    <body>
+        <h2 class="font-size">Log In</h2>
+        <div class="loading-in-progress" hidden="hidden"></div>
+        @using (Html.BeginForm())
+        {
+            <div class="input-group">
+                @Html.LabelFor(x => x.Email)
+                @Html.TextBoxFor(x => x.Email, new { @class = "textbox" })<span id="basic-addon2">@@instrumart.com</span> <br />
+            </div>
+            @Html.LabelFor(x => x.Password)
+            @Html.EditorFor(x => x.Password)
+
+            <br />
+            @Html.ValidationMessageFor(x => x.Email, null, new { @class = "error-code" })
+            <br />
+            <input type="submit" class="btn btn-primary font-size remove-unsaved-changes post-button" value="Log In" />
+        }
+    </body>
+</html>

@@ -1,0 +1,29 @@
+﻿body {
+    font-size:40px;
+    margin:40px;
+}
+
+input{
+    font-size:40px;
+    padding-left:10px;
+    margin:20px;
+}
+.error-code{
+    color:red;
+}
+.loading-in-progress{
+    text-align: center; 
+    vertical-align: middle; 
+    position: absolute; 
+    top: 30%; 
+    left: 30%; 
+    right:50%;
+    bottom:50%;
+    width:500px;
+    height:350px;
+    background-image: url(pictures/loading.gif)
+}
+
+.font-size{
+    font-size: 35px;
+}

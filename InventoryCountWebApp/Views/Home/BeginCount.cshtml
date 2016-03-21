@@ -1,0 +1,20 @@
+﻿@model InventoryCountWebApp.ViewModels.WeekForCount
+
+@{
+    ViewBag.Title = "BeginCount";
+    Dictionary<string,string> DictionaryOfWeeks = ViewBag.Weeks;
+}
+
+<h2>BeginCount</h2>
+<div class="loading-in-progress" hidden="hidden"></div>
+
+@using(Html.BeginForm())
+{
+    <!-- Confirm that they want to start a new count and get the CycleCountCode-->
+
+    <p>Select the week for your count: @Html.DropDownListFor(x => x.WeekNumber,DictionaryOfWeeks.ToSelectListItems(),new {@class="begin-count-select"}) </p>
+
+    <input type="submit" class="btn btn-primary font-size remove-unsaved-changes post-button" name="confirm" value="Begin Your New Count" />
+    <input type="submit" class="btn btn-primary font-size remove-unsaved-changes post-button" name="confirm" value="Cancel New Count" />
+
+}

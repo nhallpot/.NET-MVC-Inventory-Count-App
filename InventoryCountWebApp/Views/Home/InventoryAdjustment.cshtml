@@ -1,0 +1,48 @@
+﻿@model Instrumart.SuiteTalk.WebService.WriteResponse
+
+@{
+    ViewBag.Title = "Inventory Adjustment";
+    Layout = null;
+}
+
+@{
+    var adjustmentID = ViewBag.adjustmentID;
+    var ErrorMessage = ViewBag.ErrorMessage as string;
+    var BinOnly = ViewBag.BinOnly as string;
+    var NotesOnly = ViewBag.NotesOnly as string;
+}
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+<script type="text/javascript" src="~/Scripts/Filter.js"></script>
+<body style="padding:30px;">
+    <div class="loading-in-progress" hidden="hidden"></div>
+
+
+    @using (Html.BeginForm())
+    {
+        if (adjustmentID != null)
+        {
+            <h1><a target="_blank" class="link-to-button" href="https://system.netsuite.com/app/accounting/transactions/invadjst.nl?id=@(adjustmentID)&whence=">View Your Inventory Adjustment On NetSuite</a></h1>
+            <br />
+            <input class="btn btn-primary font-size post-button" type="submit" value="Finish this count" name="DeleteCount" />
+        }
+        else if (BinOnly !=null)
+        {
+            <h1>@(BinOnly)</h1>
+            <br />
+            <input class="btn btn-primary font-size post-button" type="submit" value="Finish this count" name="DeleteCount" />
+        }
+        else if (NotesOnly != null)
+        {
+            <h1>@(NotesOnly)</h1>
+            <br />
+            <input class="btn btn-primary font-size post-button" type="submit" value="Finish this count" name="DeleteCount" />
+        }
+        else
+        {
+            <h1 class="error-code">@(ErrorMessage)</h1>
+            Model.status.xGetAllMessagesAsHtmlList();
+
+        }
+    }
+</body>

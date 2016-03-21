@@ -1,0 +1,141 @@
+﻿/* Set for The filter bars*/
+body {
+    padding-top:160px;
+    padding-bottom: 75px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+.max-width-quantity{
+    max-width:172px;
+}
+
+
+/* Custom css written by Noah HP*/
+
+input,
+select {
+    max-width: 280px;
+}
+
+.error-code{
+    color:red;
+}
+
+tr[data-quantity-changed=true]{
+    background-color: #FFBABA;
+}
+
+tr[data-original-quantity-changed = True]{
+    background-color: #FFBABA;
+}
+tr[data-confirm-checked = true]{
+    background-color:#F0F5F5;
+}
+
+td[data-changes-made = True]{
+    background-color:yellow;
+}
+
+.description-link[data-empty=true]{
+    background-color:#286090;
+}
+.description-link[data-empty='false']{
+    background-color:#FFBABA;
+}
+
+.col-sm-8 {
+    width: 66.66666666666666%;
+    margin:30px;
+  }
+
+
+#top-filter-bar{
+    margin-top:50px;
+    font-size:25px;
+}
+
+/* Keep the links the same color text*/
+.regular-text {
+    color: black;
+}
+
+/* Makes the text boxes larger*/
+.large-text-box{
+    height:100px;
+}
+
+/* Make the checkbox Larger*/
+input[type='checkbox'] {
+    width:30px;
+    height:30px;
+    border-radius:5px;
+    border:2px solid #555;
+}
+
+input[type="submit"]{
+    max-width:none;
+}
+
+/* Bakes the select drop downs larger*/
+.select-box{
+    height:50px;
+    width:150px;
+    font-size:40px;
+}
+
+/* No width constraints on Begin Count Select*/
+.begin-count-select{
+    max-width:none;
+    width:auto;
+    font-size:40px;
+    height:50px;
+}
+
+/* Sets the font inside the table*/
+tbody{
+    font-size:40px;
+}
+
+.body-content{
+    width:95%;
+}
+
+.no-wrap{
+    white-space:nowrap;
+}
+
+.font-size{
+    font-size:35px;
+}
+/* Adds a vertical line to each column*/
+.column-with-border{
+    border-right: 1px solid #ddd;
+
+}
+
+/* Background image for when page is loading*/
+.loading-in-progress{
+    text-align: center; 
+    vertical-align: middle; 
+    position: absolute; 
+    top: 30%; 
+    left: 30%; 
+    right:50%;
+    bottom:50%;
+    width:500px;
+    height:350px;
+    background-image: url(pictures/loading.gif)
+}

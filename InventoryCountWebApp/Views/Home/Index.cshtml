@@ -1,0 +1,48 @@
+﻿@model IEnumerable<InventoryCountWebApp.Models.Item>
+
+@{
+    ViewBag.Title = "Home";
+}
+
+@{
+    var DbEmpty = ViewBag.DBEmpty as string;
+    var SummaryOfCurrentCount = ViewBag.SummaryOfCurrentCount as List<int>;
+    var CountFinished = ViewBag.CountFinished as string;
+    bool NonWeeklyCount = (bool)ViewBag.NonWeeklyCount;
+    var CanDelete = (bool)ViewBag.CanDelete;
+}
+<div class="loading-in-progress" hidden="hidden"></div>
+
+@if (DbEmpty.Equals("Empty"))
+{
+    <div style="margin:30px;">
+        <p>@Html.ActionLink("Begin your Inventory Count", "BeginCount", null, new { @class = "btn btn-primary font-size post-button" })</p>
+    </div>
+    <div style="margin:30px;">
+        @if (NonWeeklyCount)
+        {
+            <p>@Html.ActionLink("Count an Entire Column", "ColumnCount", null, new { @class = "btn btn-primary font-size post-button" })</p>
+        }
+    </div>
+}
+@if (DbEmpty.Equals("NotEmpty"))
+{ 
+    <h1>@Html.ActionLink("Continue your Inventory Count", "Filter", null, new { @class = "btn btn-primary font-size post-button" })</h1>
+    <h1>@Html.ActionLink("Finish your Inventory Count", "EndCount", null, new { @class = "btn btn-primary font-size post-button" })</h1>
+    if (CanDelete)
+    {
+        <h1>@Html.ActionLink("Delete your current Inventory Count", "DeleteDB", null, new { @class = "btn btn-primary font-size post-button" })</h1>
+    }
+    <p style="font-size:25px;"> <!-- Using in-line style as these are only <p> tags-->
+        Total items in Inventory Count: <br /> @SummaryOfCurrentCount[0]
+    </p>
+    <p style="font-size:25px;">
+        Total items counted so far:  <br /> @SummaryOfCurrentCount[1]
+    </p>
+    <p style="font-size:25px;">
+        Total items left to be counted: <br />@SummaryOfCurrentCount[2]
+    </p>
+    <h2>
+        @(CountFinished)
+    </h2>
+}

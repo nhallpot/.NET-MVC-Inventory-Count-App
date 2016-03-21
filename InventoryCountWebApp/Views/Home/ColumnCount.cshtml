@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "ColumnCount";
+}
+
+<h2>Column Count</h2>
+
+
+
+@using (Html.BeginForm())
+{
+    <div class="input-group">
+        <input name="binLocation" type="text" style="margin:10px;" class="form-control" placeholder="Bin" />
+
+        <input type="submit" class="btn btn-default post-button remove-unsaved-changes" value="Submit" />
+    </div>
+}

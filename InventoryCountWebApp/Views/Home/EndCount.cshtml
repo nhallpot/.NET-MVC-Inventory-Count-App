@@ -1,0 +1,81 @@
+﻿@model IEnumerable<InventoryCountWebApp.ViewModels.EndCountItem>
+
+@{
+    ViewBag.Title = "Finish Your Count";
+    var noChangesMade = ViewBag.NoItemsChanged as string;
+}
+<div class="loading-in-progress" hidden="hidden"></div>
+
+@using (Html.BeginForm())
+{
+    <div class="loading-in-progress" hidden="hidden"></div>
+
+    if (Model != null)
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.InventoryItem.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InventoryItem.BinLocation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InventoryItem.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InventoryItem.OnHand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InventoryItem.Notes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InventoryItem.NewOnHand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InventoryItem.NewBinLocation)
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr data-original-quantity-changed="@(item.OriginalQuantityChanged == true ? true:false)">
+                    <td class="column-with-border">
+                        @Html.DisplayFor(modelItem => item.InventoryItem.Name)
+                    </td>
+                    <td class="column-with-border">
+                        @Html.DisplayFor(modelItem => item.InventoryItem.BinLocation)
+                    </td>
+                    <td class="column-with-border">
+                        @Html.DisplayFor(modelItem => item.InventoryItem.Description)
+                    </td>
+                    <td class="column-with-border">
+                        @Html.DisplayFor(modelItem => item.InventoryItem.OnHand)
+                    </td>
+                    <td class="column-with-border" data-changes-made="@(item.InventoryItem.Notes != null ? true : false)">
+                        @item.InventoryItem.Notes
+                    </td>
+                    <td class="column-with-border" data-changes-made="@(item.InventoryItem.NewOnHand != item.InventoryItem.OnHand ? true : false)">
+                        @(item.InventoryItem.NewOnHand == item.InventoryItem.OnHand ? 0 : item.InventoryItem.NewOnHand - item.InventoryItem.OnHand)
+                    </td>
+                    <td data-changes-made="@(item.InventoryItem.NewBinLocation != item.InventoryItem.BinLocation ? true : false)">
+                        @Html.DisplayFor(modelItem => item.InventoryItem.NewBinLocation)
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+
+    }
+    if(noChangesMade!= null)
+    {
+        <h1>@(noChangesMade)</h1>
+    }
+    else
+    { 
+        <input type="submit" class="btn btn-primary font-size post-button" name="FinishCount" value="Continue Working on Count" />
+        <input type="submit" class="btn btn-primary font-size post-button" name="FinishCount" value="Confirm Changes and Complete Count" />
+    }
+}

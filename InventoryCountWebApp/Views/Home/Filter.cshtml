@@ -1,0 +1,73 @@
+﻿@model IEnumerable<InventoryCountWebApp.Models.Item>
+
+@{
+    ViewBag.Title = "Filter Your Count";
+}
+
+@{
+    var BinLocations = ViewBag.BinLocations as List<InventoryCountWebApp.Models.BinLocation>; // List of all bin locations
+    var SummaryOfCurrentCount = ViewBag.SummaryOfCurrentCount as List<int>; // Retrieve total items, total counted and total not counted
+}
+@using (Html.BeginForm())
+{
+
+    <div class="loading-in-progress" hidden="hidden"></div> <!-- Display the loading image while page loads-->
+     <div id="table">
+         <div id="top-filter-bar"class="navbar navbar-default navbar-fixed-top">
+             <div class="container">
+
+                     <p><button id="refresh-button" type="submit" class="btn btn-default font-size" aria-label="Left Align">
+                             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                         </button>
+                        Filter by Bin Location: <select id="bin-location" name="StringBinLocation" class="select-box" style="margin-top:5px;">
+                                 <option value="">All</option>
+                                 @foreach (var bin in BinLocations)
+                                 {
+                                     /* Data attributes trigger css styling that hide/show bins depending on what checkboxes are checked
+                                      * as well as the current status of the count */
+                                     @Html.Partial("_OptionView", bin);
+                                 }
+                             </select>
+                    </p>
+                     <!-- Checkboxes trigger javascript events as well as styling changes -->
+                     <span style="font-weight:normal;"> Hide Zeros: <input id="get-rid-of-zero" type="checkbox" data-checked="true" checked="checked" name="GetRidOfZero" /></span>
+                     <span style="font-weight:normal;"> Hide items that have been counted: <input id="items-not-counted" checked="checked" type="checkbox" name="ItemsNotCounted" /></span>
+                 </div>
+         </div>
+            <table id="form-table" class="table table-condensed">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BinLocation)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OnHand)
+                    </th>
+                </tr>
+                <tbody id="table-body">
+                    @foreach (var item in Model)
+                    {
+                        @Html.Partial("_TableRow", item);
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container" style="width:95%;"> <!-- This is to compensate the size of the text-->
+                <ul id="footer-bar" class="nav nav-pills">
+                    <li role="presentation">
+                        <p class="navbar-text" style="font-size:25px;">Items in count: @SummaryOfCurrentCount[0]</p>
+                    </li>
+                    <li role="presentation" >
+                        <p class="navbar-text" style="font-size:25px;">Total Items Counted:  <span id="items-counted">@SummaryOfCurrentCount[1]</span> </p>
+                    </li>
+                    <li role ="presentation" >
+                        <p class="navbar-text" style="font-size:25px;">Items Left to be Counted: <span id="items-left">@SummaryOfCurrentCount[2]</span></p> 
+                    </li>
+                </ul>
+        </div>
+    </div>
+
+}

@@ -1,0 +1,5 @@
+﻿@model InventoryCountWebApp.Models.BinLocation
+
+<option id="@(Model.Bin != null ? Model.Bin.Replace(", ","_") : Model.Bin)" class="select-box" value="@Model.Bin" data-has-only-non-zeros="@(Model.ContainsOnlyNonZeros)" data-all-items-counted="@(Model.ContainsOnlyCountedItems)" data-has-un-counted-non-zeros="@(Model.ContainsUncountedOnHand)">@Model.Bin</option>
+
+

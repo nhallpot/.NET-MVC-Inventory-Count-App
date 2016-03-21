@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title="Description";
+    Layout = null;
+}
+@model InventoryCountWebApp.Models.Item
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+    <script type="tex" src="~/Scripts/Filter.js"></script>
+</head>
+<body>
+    <div id="description-fancybox" data-fancybox-id="@(Model.ID)" class="description-fancybox">
+        <div id="top-half">
+            <div id="left-column">
+                <h2>Description:</h2>
+                <p>@(Model.Description)</p>
+                <h2>Vendor Code</h2>
+                <p>@(Model.VendorCode)</p>
+                <h2>Brand</h2>
+                <p>@(Model.Brand)</p>
+            </div>
+            <div id="right-column">
+                <div id="right-info-column">
+                    <h2>On Hand</h2>
+                    <p>@(Model.OnHand)</p>
+                    <h2>Backordered</h2>
+                    <p>@(Model.QuantityBackOrdered)</p>
+                    <h2>Web Page</h2>
+                    @if(Model.WebProductID == 0)
+                    {
+                        <p>No Product Page</p>
+                    }
+                    else
+                    {
+                        <a target="_blank" href="https://www.instrumart.com/products/@(Model.WebProductID)">Link to Web page</a>
+                    }
+                    @if(Model.OnPartial == true)
+                    {
+                        <h2>Possible Partial</h2>
+                        <p>This item could be on partial shelf</p>
+                    }
+                </div>
+                <div id="right-save-column">
+                    <button id="fancybox-save-button">Save Changes</button>
+                </div>
+            </div>
+        </div>
+        <div id="bottom-half">
+                <p> Enter in your Notes:</p><textarea class="fancybox-text-area"
+                                                      type="text" placeholder="Enter Your Notes Here" />
+                <p>Enter in a new Bin Location: </p><input class="fancybox-text-input" name="NewBinLocationForItem@(Model.ID)" type="text" placeholder="Ex. 1-A" />
+            
+            
+        </div>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript">
+    var ID = $("#description-fancybox").data("fancybox-id");
+
+    // Fancy box variables
+    var notesTextValue = $(".fancybox-text-area");
+    var newBinTextBox = $(".fancybox-text-input");
+
+    // Variables from the filter form
+    var notes = $("#notes-for-item-id-" + ID).val();
+    var binLocation = $("#bin-location-for-item-id-" + ID).text();
+    var newBinLocation = $("#new-bin-location-for-item-id-" + ID).val();
+    var linkButton = $("#description-for-item-id-" + ID);
+
+    // Grab db values to be current
+    notesTextValue.val(notes);
+
+    if (binLocation != newBinLocation)
+    {
+        newBinTextBox.val(newBinLocation); // we only want to pull if it is different for bin location
+    }
+
+    $("#fancybox-save-button").click(function () {
+
+        $.fancybox.close();
+    });
+
+</script>

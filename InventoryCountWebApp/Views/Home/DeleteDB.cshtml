@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Delete this Count";
+}
+
+<h2>Are you sure you want to delete this Inventory Count? </h2>
+<h4> If yes, you will not be able to access any of your changes for this week.</h4>
+<div class="loading-in-progress" hidden="hidden"></div>
+
+@using (Html.BeginForm())
+{
+    <p><input type="submit" class="btn btn-primary font-size post-button" name="ConfirmDelete" value="Delete Count" /></p>
+    <p><input type="submit" class="btn btn-primary font-size post-button" name="ConfirmDelete" value="Don't Delete Count" /></p>
+
+}
+
